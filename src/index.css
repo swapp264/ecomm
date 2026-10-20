@@ -1,0 +1,432 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Barlow+Condensed:wght@400;500;600;700;800;900&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ============================================================
+   GLOBAL DARK THEME TOKENS
+   ============================================================ */
+:root {
+  color-scheme: dark;
+  --bg-primary: #0A0A0A;
+  --bg-secondary: #101010;
+  --bg-section: #141414;
+  --bg-card: #1A1A1A;
+  --bg-elevated: #202020;
+  --border: #303030;
+  --border-light: #404040;
+  --gold: #FFC107;
+  --gold-dark: #E5A900;
+  --gold-light: #FFD54F;
+  --text-primary: #FFFFFF;
+  --text-secondary: #B3B3B3;
+  --text-muted: #858585;
+  --success: #22C55E;
+  --error: #EF4444;
+}
+
+/* ============================================================
+   BASE RESET & DARK DEFAULTS
+   ============================================================ */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  background-color: #0A0A0A;
+}
+
+body {
+  background-color: #0A0A0A;
+  color: #FFFFFF;
+  font-family: 'Inter', system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  min-height: 100vh;
+}
+
+/* ============================================================
+   BROWSER AUTOFILL DARK OVERRIDE
+   ============================================================ */
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active,
+textarea:-webkit-autofill,
+select:-webkit-autofill {
+  -webkit-box-shadow: 0 0 0 1000px #1A1A1A inset !important;
+  -webkit-text-fill-color: #FFFFFF !important;
+  transition: background-color 5000s ease-in-out 0s;
+}
+
+/* ============================================================
+   SCROLLBAR DARK THEME
+   ============================================================ */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #101010;
+}
+::-webkit-scrollbar-thumb {
+  background: #303030;
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #FFC107;
+}
+
+/* ============================================================
+   TYPOGRAPHY
+   ============================================================ */
+.font-display {
+  font-family: 'Barlow Condensed', sans-serif;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: #FFFFFF;
+}
+
+/* ============================================================
+   COMPONENT UTILITIES
+   ============================================================ */
+@layer components {
+  /* Gold Button */
+  .btn-gold {
+    @apply bg-gold text-black font-bold px-6 py-3 rounded transition-all duration-200 hover:bg-gold-dark active:scale-95 inline-flex items-center gap-2;
+  }
+  .btn-gold-outline {
+    @apply border-2 border-gold text-gold font-bold px-6 py-3 rounded transition-all duration-200 hover:bg-gold hover:text-black active:scale-95 inline-flex items-center gap-2;
+  }
+  .btn-dark {
+    @apply bg-bg-elevated text-text-primary font-semibold px-6 py-3 rounded border border-border transition-all duration-200 hover:border-gold hover:text-gold active:scale-95;
+  }
+
+  /* Product Card */
+  .card {
+    @apply bg-bg-card border border-border rounded-xl overflow-hidden transition-all duration-300 hover:border-gold/40 hover:shadow-[0_0_20px_rgba(255,193,7,0.08)];
+  }
+
+  /* Input Dark */
+  .input-dark {
+    @apply bg-bg-elevated border border-border rounded-lg px-4 py-3 text-text-primary placeholder:text-text-muted focus:outline-none focus:border-gold transition-colors w-full;
+  }
+
+  /* Badge */
+  .badge-gold {
+    @apply bg-gold text-black text-xs font-bold px-2 py-0.5 rounded;
+  }
+  .badge-success {
+    @apply bg-success/20 text-success text-xs font-semibold px-2 py-0.5 rounded;
+  }
+  .badge-error {
+    @apply bg-error/20 text-error text-xs font-semibold px-2 py-0.5 rounded;
+  }
+
+  /* Section Wrapper */
+  .section-wrapper {
+    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+  }
+  .section-pad {
+    @apply py-12 md:py-20;
+  }
+
+  /* Section Title */
+  .section-title {
+    @apply text-3xl md:text-4xl font-display font-bold tracking-wide;
+  }
+  .section-subtitle {
+    @apply text-text-secondary text-base mt-2;
+  }
+
+  /* Price */
+  .price-current {
+    @apply text-gold font-bold text-xl;
+  }
+  .price-original {
+    @apply text-text-muted line-through text-sm;
+  }
+  .price-discount {
+    @apply text-success text-sm font-semibold;
+  }
+
+  /* Star Rating */
+  .star-filled { @apply text-gold; }
+  .star-empty { @apply text-border-light; }
+
+  /* Skeleton loader */
+  .skeleton {
+    @apply bg-bg-elevated rounded animate-pulse;
+    background: linear-gradient(90deg, #1A1A1A 25%, #202020 50%, #1A1A1A 75%);
+    background-size: 200% 100%;
+    animation: shimmer 1.5s linear infinite;
+  }
+
+  /* Divider */
+  .divider {
+    @apply border-t border-border my-6;
+  }
+
+  /* Gold underline heading accent */
+  .heading-accent::after {
+    content: '';
+    @apply block w-12 h-1 bg-gold mt-2 rounded;
+  }
+}
+
+/* ============================================================
+   WEIGHTLIFTING LOADER
+   ============================================================ */
+.loader-overlay {
+  position: fixed;
+  inset: 0;
+  background: #0A0A0A;
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
+}
+
+.loader-overlay.fade-out {
+  animation: loaderFadeOut 0.7s ease forwards;
+}
+
+@keyframes loaderFadeOut {
+  to { opacity: 0; pointer-events: none; }
+}
+
+/* ============================================================
+   ANNOUNCEMENT BAR MARQUEE
+   ============================================================ */
+.marquee-inner {
+  display: flex;
+  white-space: nowrap;
+  animation: marquee 25s linear infinite;
+}
+
+/* ============================================================
+   HERO GRADIENT OVERLAYS
+   ============================================================ */
+.hero-overlay {
+  background: linear-gradient(
+    135deg,
+    rgba(10,10,10,0.9) 0%,
+    rgba(10,10,10,0.6) 50%,
+    rgba(10,10,10,0.3) 100%
+  );
+}
+
+/* ============================================================
+   PRODUCT GRID
+   ============================================================ */
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 1rem;
+}
+
+/* ============================================================
+   CART DRAWER
+   ============================================================ */
+.cart-drawer {
+  position: fixed;
+  top: 0;
+  right: 0;
+  height: 100vh;
+  width: min(420px, 95vw);
+  background: #101010;
+  border-left: 1px solid #303030;
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  transform: translateX(100%);
+  transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.cart-drawer.open {
+  transform: translateX(0);
+}
+
+/* ============================================================
+   FILTER PANEL
+   ============================================================ */
+.filter-drawer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: #141414;
+  border-top: 1px solid #303030;
+  z-index: 1000;
+  max-height: 85vh;
+  overflow-y: auto;
+  transform: translateY(100%);
+  transition: transform 0.3s ease;
+  border-radius: 16px 16px 0 0;
+}
+.filter-drawer.open {
+  transform: translateY(0);
+}
+
+/* ============================================================
+   SWIPER CUSTOM STYLES
+   ============================================================ */
+.swiper-button-next,
+.swiper-button-prev {
+  color: #FFC107 !important;
+  background: rgba(26,26,26,0.8);
+  border: 1px solid #303030;
+  border-radius: 50%;
+  width: 40px !important;
+  height: 40px !important;
+}
+.swiper-button-next::after,
+.swiper-button-prev::after {
+  font-size: 14px !important;
+}
+.swiper-pagination-bullet {
+  background: #303030 !important;
+}
+.swiper-pagination-bullet-active {
+  background: #FFC107 !important;
+}
+
+/* ============================================================
+   MODAL / DIALOG OVERLAY
+   ============================================================ */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.75);
+  z-index: 500;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  backdrop-filter: blur(4px);
+}
+
+/* ============================================================
+   TABS (product detail)
+   ============================================================ */
+.tab-btn {
+  padding: 12px 20px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  border-bottom: 2px solid transparent;
+  color: #858585;
+  transition: all 0.2s;
+  white-space: nowrap;
+  cursor: pointer;
+  background: none;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+}
+.tab-btn:hover {
+  color: #FFC107;
+}
+.tab-btn.active {
+  color: #FFC107;
+  border-bottom-color: #FFC107;
+}
+
+/* ============================================================
+   TOAST OVERRIDES
+   ============================================================ */
+.toast-dark {
+  background: #1A1A1A !important;
+  color: #FFFFFF !important;
+  border: 1px solid #303030 !important;
+}
+
+/* ============================================================
+   RANGE INPUT DARK
+   ============================================================ */
+input[type=range] {
+  -webkit-appearance: none;
+  width: 100%;
+  height: 4px;
+  background: #303030;
+  border-radius: 2px;
+  outline: none;
+}
+input[type=range]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 18px;
+  height: 18px;
+  background: #FFC107;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+/* ============================================================
+   NUMBER INPUT ARROWS HIDDEN
+   ============================================================ */
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* ============================================================
+   ANIMATIONS
+   ============================================================ */
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+@keyframes marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-fadeInUp {
+  animation: fadeInUp 0.5s ease forwards;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-12px); }
+}
+
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
+
+/* Warning color */
+.text-warning { color: #F59E0B; }
+.bg-warning { background-color: #F59E0B; }
+
+/* Inline flex btn fix */
+.btn-gold, .btn-gold-outline, .btn-dark {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+/* Scrollbar none utility */
+.scrollbar-none::-webkit-scrollbar { display: none; }
+.scrollbar-none { -ms-overflow-style: none; scrollbar-width: none; }
+
+/* Animate fade-in for modals */
+@keyframes fadeIn {
+  from { opacity: 0; transform: scale(0.95); }
+  to { opacity: 1; transform: scale(1); }
+}
+.animate-fade-in {
+  animation: fadeIn 0.2s ease forwards;
+}
